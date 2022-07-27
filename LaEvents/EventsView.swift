@@ -7,13 +7,17 @@
 
 import SwiftUI
 
-struct Alert {
+struct EventAlert: Identifiable {
+  var id: String {
+    return title
+  }
+  
   let title: String
   let message: String
 }
 
 class EventsViewModel: ObservableObject {
-  @Published var alert: Alert?
+  @Published var alert: EventAlert?
   @Published var events: [Event] = []
   
   let fileClient: FileClient
@@ -30,7 +34,7 @@ class EventsViewModel: ObservableObject {
       let decoder = JSONDecoder()
       self.events = try decoder.decode([Event].self, from: data)
     } catch let error {
-      self.alert = Alert(title: "Oops!", message: error.localizedDescription)
+      self.alert = EventAlert(title: "Oops!", message: error.localizedDescription)
     }
   }
   
@@ -38,7 +42,7 @@ class EventsViewModel: ObservableObject {
 
 struct EventsView: View {
   
-  let viewModel: EventsViewModel
+  @ObservedObject var viewModel: EventsViewModel
   
   var body: some View {
     NavigationView {
@@ -46,6 +50,12 @@ struct EventsView: View {
         EventRow(event: event)
           .listRowInsets(.zero)
       }
+      .alert(item: self.$viewModel.alert, content: { alert in
+        Alert(
+          title: Text(alert.title),
+          message: Text(alert.message)
+        )
+      })
       .navigationTitle("Events")
     }
   }
