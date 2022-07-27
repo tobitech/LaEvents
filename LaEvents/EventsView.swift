@@ -18,7 +18,15 @@ struct EventAlert: Identifiable {
 
 class EventsViewModel: ObservableObject {
   @Published var alert: EventAlert?
-  @Published var events: [Event] = []
+  var events: [Event] = []
+  var filteredEvents: [Event] {
+    guard !query.isEmpty else {
+      return self.events
+    }
+    
+    return events.filter { $0.city.lowercased().contains(query.lowercased()) }
+  }
+  @Published var query: String = ""
   
   let fileClient: FileClient
   
@@ -37,7 +45,6 @@ class EventsViewModel: ObservableObject {
       self.alert = EventAlert(title: "Oops!", message: error.localizedDescription)
     }
   }
-  
 }
 
 struct EventsView: View {
@@ -46,7 +53,7 @@ struct EventsView: View {
   
   var body: some View {
     NavigationView {
-      List(self.viewModel.events) { event in
+      List(self.viewModel.filteredEvents) { event in
         EventRow(event: event)
           .listRowInsets(.zero)
       }
@@ -57,6 +64,7 @@ struct EventsView: View {
         )
       })
       .navigationTitle("Events")
+      .searchable(text: self.$viewModel.query, prompt: "Search events...")
     }
   }
 }
