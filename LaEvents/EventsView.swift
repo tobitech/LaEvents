@@ -5,6 +5,7 @@
 //  Created by Oluwatobi Omotayo on 27/07/2022.
 //
 
+import Combine
 import SwiftUI
 
 struct EventAlert: Identifiable {
@@ -20,17 +21,13 @@ class EventsViewModel: ObservableObject {
   @Published var alert: EventAlert?
   @Published var query: String = ""
   
+  private var loadDataCancellable: AnyCancellable?
+  
   private var categories: [EventCategory] = []
   var filteredCategories: [EventCategory] {
     guard !query.isEmpty else {
       return self.categories
     }
-    
-//    let filtered = self.categories.filter {
-//      $0.events.contains {
-//        $0.city.lowercased().contains(query.lowercased())
-//      }
-//    }
     
     var filtered = [EventCategory]()
     for item in self.categories {
@@ -54,13 +51,14 @@ class EventsViewModel: ObservableObject {
   }
   
   func loadEvents() {
-    do {
-      let data = try fileClient.loadData("events")
-      let decoder = JSONDecoder()
-      self.categories = try decoder.decode([EventCategory].self, from: data)
-    } catch let error {
-      self.alert = EventAlert(title: "Oops!", message: error.localizedDescription)
-    }
+    self.loadDataCancellable =  self.fileClient
+      .loadData("events")
+      .sink(
+        receiveCompletion: { _ in },
+        receiveValue: {[weak self] categories in
+          self?.categories = categories
+        }
+      )
   }
 }
 

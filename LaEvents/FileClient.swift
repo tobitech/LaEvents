@@ -5,6 +5,7 @@
 //  Created by Oluwatobi Omotayo on 27/07/2022.
 //
 
+import Combine
 import Foundation
 
 struct Event: Codable, Equatable, Identifiable {
@@ -25,10 +26,11 @@ extension Event {
 
 enum EventsError: Error {
   case invalidFileName
+  case decodingError
 }
 
 struct FileClient {
-  var loadData: (String) throws -> Data
+  var loadData: (String) -> AnyPublisher<[EventCategory], EventsError>
 }
 
 extension FileClient {
@@ -36,10 +38,21 @@ extension FileClient {
     return Self(
       loadData: { filename in
         guard let url = Bundle.main.url(forResource: filename, withExtension: "json") else {
-          throw EventsError.invalidFileName
+          return Fail(error: EventsError.invalidFileName)
+            .eraseToAnyPublisher()
         }
         
-        return try Data(contentsOf: url)
+        do {
+          let data = try Data(contentsOf: url)
+          let decoder = JSONDecoder()
+          let categories = try decoder.decode([EventCategory].self, from: data)
+          return Just(categories)
+            .setFailureType(to: EventsError.self)
+            .eraseToAnyPublisher()
+        } catch {
+          return Fail(error: EventsError.decodingError)
+            .eraseToAnyPublisher()
+        }
       }
     )
   }
@@ -49,9 +62,9 @@ extension FileClient {
 extension FileClient {
   static let mock = Self(
     loadData: { _ in
-      return try JSONEncoder().encode([
-        EventCategory.awards, .sports
-      ])
+      return Just([EventCategory.awards, .sports])
+        .setFailureType(to: EventsError.self)
+        .eraseToAnyPublisher()
     }
   )
 }
