@@ -14,7 +14,18 @@
 		202117F72891681500116E0B /* events.json in Resources */ = {isa = PBXBuildFile; fileRef = 202117F62891681500116E0B /* events.json */; };
 		202117F9289170BB00116E0B /* FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202117F8289170BB00116E0B /* FileClient.swift */; };
 		202117FB2891772B00116E0B /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202117FA2891772B00116E0B /* EventRow.swift */; };
+		2095A9F22893EBB1003A9F1C /* LaEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095A9F12893EBB1003A9F1C /* LaEventsTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2095A9F32893EBB1003A9F1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 202117DC28915D8600116E0B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 202117E328915D8600116E0B;
+			remoteInfo = LaEvents;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		202117E428915D8600116E0B /* LaEvents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaEvents.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,10 +37,19 @@
 		202117F62891681500116E0B /* events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = events.json; sourceTree = "<group>"; };
 		202117F8289170BB00116E0B /* FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileClient.swift; sourceTree = "<group>"; };
 		202117FA2891772B00116E0B /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
+		2095A9EF2893EBB1003A9F1C /* LaEventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LaEventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2095A9F12893EBB1003A9F1C /* LaEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaEventsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		202117E128915D8600116E0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2095A9EC2893EBB1003A9F1C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -44,6 +64,7 @@
 			children = (
 				202117F528915DC400116E0B /* Playground.playground */,
 				202117E628915D8600116E0B /* LaEvents */,
+				2095A9F02893EBB1003A9F1C /* LaEventsTests */,
 				202117E528915D8600116E0B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				202117E428915D8600116E0B /* LaEvents.app */,
+				2095A9EF2893EBB1003A9F1C /* LaEventsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,6 +100,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		2095A9F02893EBB1003A9F1C /* LaEventsTests */ = {
+			isa = PBXGroup;
+			children = (
+				2095A9F12893EBB1003A9F1C /* LaEventsTests.swift */,
+			);
+			path = LaEventsTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -98,6 +128,24 @@
 			productReference = 202117E428915D8600116E0B /* LaEvents.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2095A9EE2893EBB1003A9F1C /* LaEventsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2095A9F72893EBB1003A9F1C /* Build configuration list for PBXNativeTarget "LaEventsTests" */;
+			buildPhases = (
+				2095A9EB2893EBB1003A9F1C /* Sources */,
+				2095A9EC2893EBB1003A9F1C /* Frameworks */,
+				2095A9ED2893EBB1003A9F1C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2095A9F42893EBB1003A9F1C /* PBXTargetDependency */,
+			);
+			name = LaEventsTests;
+			productName = LaEventsTests;
+			productReference = 2095A9EF2893EBB1003A9F1C /* LaEventsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -110,6 +158,10 @@
 				TargetAttributes = {
 					202117E328915D8600116E0B = {
 						CreatedOnToolsVersion = 13.4;
+					};
+					2095A9EE2893EBB1003A9F1C = {
+						CreatedOnToolsVersion = 13.4;
+						TestTargetID = 202117E328915D8600116E0B;
 					};
 				};
 			};
@@ -127,6 +179,7 @@
 			projectRoot = "";
 			targets = (
 				202117E328915D8600116E0B /* LaEvents */,
+				2095A9EE2893EBB1003A9F1C /* LaEventsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -139,6 +192,13 @@
 				202117EF28915D8900116E0B /* Preview Assets.xcassets in Resources */,
 				202117EC28915D8900116E0B /* Assets.xcassets in Resources */,
 				202117F72891681500116E0B /* events.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2095A9ED2893EBB1003A9F1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +216,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2095A9EB2893EBB1003A9F1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2095A9F22893EBB1003A9F1C /* LaEventsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2095A9F42893EBB1003A9F1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 202117E328915D8600116E0B /* LaEvents */;
+			targetProxy = 2095A9F32893EBB1003A9F1C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		202117F028915D8900116E0B /* Debug */ = {
@@ -331,6 +407,42 @@
 			};
 			name = Release;
 		};
+		2095A9F52893EBB1003A9F1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J8A5ZAM5GV;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oluwatobiomotayo.LaEventsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LaEvents.app/LaEvents";
+			};
+			name = Debug;
+		};
+		2095A9F62893EBB1003A9F1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J8A5ZAM5GV;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oluwatobiomotayo.LaEventsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LaEvents.app/LaEvents";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -348,6 +460,15 @@
 			buildConfigurations = (
 				202117F328915D8900116E0B /* Debug */,
 				202117F428915D8900116E0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2095A9F72893EBB1003A9F1C /* Build configuration list for PBXNativeTarget "LaEventsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2095A9F52893EBB1003A9F1C /* Debug */,
+				2095A9F62893EBB1003A9F1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

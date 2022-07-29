@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Event: Codable, Identifiable {
+struct Event: Codable, Equatable, Identifiable {
   let id: String
   let city: String
   let artiste: String
@@ -16,6 +16,8 @@ struct Event: Codable, Identifiable {
 
 extension Event {
   static let superbowl = Event(id: "1", city: "Seattle", artiste: "Beyonce", price: 299.99)
+  static let grammies = Event(id: "2", city: "San Francisco", artiste: "Taylor Swift", price: 1099.99)
+  static let eddies = Event(id: "3", city: "Texas", artiste: "Bellie Eilish", price: 34.99)
 }
 
 
@@ -44,7 +46,11 @@ extension FileClient {
 extension FileClient {
   static let mock = Self(
     loadData: { _ in
-      return try JSONEncoder().encode([Event.superbowl])
+      return try JSONEncoder().encode([
+        Event.superbowl,
+        .eddies,
+        .grammies
+      ])
     }
   )
 }

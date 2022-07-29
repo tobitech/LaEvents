@@ -18,7 +18,7 @@ struct EventAlert: Identifiable {
 
 class EventsViewModel: ObservableObject {
   @Published var alert: EventAlert?
-  var events: [Event] = []
+  private var events: [Event] = []
   var filteredEvents: [Event] {
     guard !query.isEmpty else {
       return self.events
