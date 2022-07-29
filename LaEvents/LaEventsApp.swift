@@ -11,7 +11,7 @@ import SwiftUI
 struct LaEventsApp: App {
   var body: some Scene {
     WindowGroup {
-      EventsView(viewModel: EventsViewModel(fileClient: .live))
+      EventsView(viewModel: EventsViewModel(fileClient: .mock))
     }
   }
 }

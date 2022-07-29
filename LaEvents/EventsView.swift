@@ -18,15 +18,32 @@ struct EventAlert: Identifiable {
 
 class EventsViewModel: ObservableObject {
   @Published var alert: EventAlert?
-  private var events: [Event] = []
-  var filteredEvents: [Event] {
+  @Published var query: String = ""
+  
+  private var categories: [EventCategory] = []
+  var filteredCategories: [EventCategory] {
     guard !query.isEmpty else {
-      return self.events
+      return self.categories
     }
     
-    return events.filter { $0.city.lowercased().contains(query.lowercased()) }
+//    let filtered = self.categories.filter {
+//      $0.events.contains {
+//        $0.city.lowercased().contains(query.lowercased())
+//      }
+//    }
+    
+    var filtered = [EventCategory]()
+    for item in self.categories {
+      var category = item
+      let events = category.events.filter { $0.city.lowercased().contains(query.lowercased()) }
+      category.events = events
+      if !category.events.isEmpty {
+        filtered.append(category)
+      }
+    }
+    
+    return filtered
   }
-  @Published var query: String = ""
   
   let fileClient: FileClient
   
@@ -40,7 +57,7 @@ class EventsViewModel: ObservableObject {
     do {
       let data = try fileClient.loadData("events")
       let decoder = JSONDecoder()
-      self.events = try decoder.decode([Event].self, from: data)
+      self.categories = try decoder.decode([EventCategory].self, from: data)
     } catch let error {
       self.alert = EventAlert(title: "Oops!", message: error.localizedDescription)
     }
@@ -53,17 +70,22 @@ struct EventsView: View {
   
   var body: some View {
     NavigationView {
-      List(self.viewModel.filteredEvents) { event in
-        EventRow(event: event)
-          .listRowInsets(.zero)
+      List(self.viewModel.filteredCategories) { category in
+        Section(header: Text(category.name)) {
+          ForEach(category.events) { event in
+            EventRow(event: event)
+          }
+        }
+        .listRowInsets(.zero)
       }
+      .listStyle(.plain)
       .alert(item: self.$viewModel.alert, content: { alert in
         Alert(
           title: Text(alert.title),
           message: Text(alert.message)
         )
       })
-      .navigationTitle("Events")
+      .navigationTitle("Concerts")
       .searchable(text: self.$viewModel.query, prompt: "Search events...")
     }
   }

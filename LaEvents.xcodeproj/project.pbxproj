@@ -15,6 +15,7 @@
 		202117F9289170BB00116E0B /* FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202117F8289170BB00116E0B /* FileClient.swift */; };
 		202117FB2891772B00116E0B /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202117FA2891772B00116E0B /* EventRow.swift */; };
 		2095A9F22893EBB1003A9F1C /* LaEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095A9F12893EBB1003A9F1C /* LaEventsTests.swift */; };
+		2095A9F92893F1EA003A9F1C /* EventCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095A9F82893F1EA003A9F1C /* EventCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		202117FA2891772B00116E0B /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		2095A9EF2893EBB1003A9F1C /* LaEventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LaEventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2095A9F12893EBB1003A9F1C /* LaEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaEventsTests.swift; sourceTree = "<group>"; };
+		2095A9F82893F1EA003A9F1C /* EventCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		202117E628915D8600116E0B /* LaEvents */ = {
 			isa = PBXGroup;
 			children = (
+				2095A9F82893F1EA003A9F1C /* EventCategory.swift */,
 				202117F8289170BB00116E0B /* FileClient.swift */,
 				202117E728915D8600116E0B /* LaEventsApp.swift */,
 				202117E928915D8600116E0B /* EventsView.swift */,
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2095A9F92893F1EA003A9F1C /* EventCategory.swift in Sources */,
 				202117EA28915D8600116E0B /* EventsView.swift in Sources */,
 				202117F9289170BB00116E0B /* FileClient.swift in Sources */,
 				202117E828915D8600116E0B /* LaEventsApp.swift in Sources */,

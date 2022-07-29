@@ -8,18 +8,20 @@
 import Foundation
 
 struct Event: Codable, Equatable, Identifiable {
-  let id: String
+  let id: Int
   let city: String
   let artiste: String
   let price: Double
 }
 
+#if DEBUG
 extension Event {
-  static let superbowl = Event(id: "1", city: "Seattle", artiste: "Beyonce", price: 299.99)
-  static let grammies = Event(id: "2", city: "San Francisco", artiste: "Taylor Swift", price: 1099.99)
-  static let eddies = Event(id: "3", city: "Texas", artiste: "Bellie Eilish", price: 34.99)
+  static let superbowl = Event(id: 1, city: "Seattle", artiste: "Beyonce", price: 299.99)
+  static let grammies = Event(id: 2, city: "San Francisco", artiste: "Taylor Swift", price: 1099.99)
+  static let eddies = Event(id: 3, city: "Texas", artiste: "Bellie Eilish", price: 34.99)
+  static let worldcup = Event(id: 4, city: "Dubai", artiste: "Davido", price: 64.99)
 }
-
+#endif
 
 enum EventsError: Error {
   case invalidFileName
@@ -43,14 +45,14 @@ extension FileClient {
   }
 }
 
+#if DEBUG
 extension FileClient {
   static let mock = Self(
     loadData: { _ in
       return try JSONEncoder().encode([
-        Event.superbowl,
-        .eddies,
-        .grammies
+        EventCategory.awards, .sports
       ])
     }
   )
 }
+#endif
