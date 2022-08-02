@@ -23,23 +23,24 @@ class EventsViewModel: ObservableObject {
   
   private var loadDataCancellable: AnyCancellable?
   
-  private var categories: [EventCategory] = []
+  private var concerts: [EventCategory] = []
   var filteredCategories: [EventCategory] {
-    guard !query.isEmpty else {
-      return self.categories
-    }
-    
-    var filtered = [EventCategory]()
-    for item in self.categories {
-      var category = item
-      let events = category.events.filter { $0.city.lowercased().contains(query.lowercased()) }
-      category.events = events
-      if !category.events.isEmpty {
-        filtered.append(category)
-      }
-    }
-    
-    return filtered
+    return self.concerts
+//    guard !query.isEmpty else {
+//      return self.concerts
+//    }
+//
+//    var filtered = [EventCategory]()
+//    for item in self.concerts {
+//      var category = item
+//      let events = category.events.filter { $0.city.lowercased().contains(query.lowercased()) }
+//      category.events = events
+//      if !category.events.isEmpty {
+//        filtered.append(category)
+//      }
+//    }
+//
+//    return filtered
   }
   
   let fileClient: FileClient
@@ -51,14 +52,13 @@ class EventsViewModel: ObservableObject {
   }
   
   func loadEvents() {
-    self.loadDataCancellable =  self.fileClient
-      .loadData("events")
-      .sink(
-        receiveCompletion: { _ in },
-        receiveValue: {[weak self] categories in
-          self?.categories = categories
-        }
-      )
+    let result = self.fileClient.loadData("events")
+    switch result {
+    case let .success(category):
+      self.concerts = category.children
+    case let .failure(error):
+      self.alert = .init(title: "Oops!", message: error.localizedDescription)
+    }
   }
 }
 
@@ -70,13 +70,12 @@ struct EventsView: View {
     NavigationView {
       List(self.viewModel.filteredCategories) { category in
         Section(header: Text(category.name)) {
-          ForEach(category.events) { event in
-            EventRow(event: event)
+          ForEach(category.children) { concert in
+            EventRow(concert: concert)
           }
         }
-        .listRowInsets(.zero)
       }
-      .listStyle(.plain)
+      .listStyle(.grouped)
       .alert(item: self.$viewModel.alert, content: { alert in
         Alert(
           title: Text(alert.title),

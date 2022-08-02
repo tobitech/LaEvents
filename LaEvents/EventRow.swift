@@ -8,16 +8,22 @@
 import SwiftUI
 
 struct EventRow: View {
-  @State var event: Event
+  @State var concert: EventCategory
   
   var body: some View {
     HStack {
       VStack(alignment: .leading) {
-        Text(event.artiste)
+        Text(concert.name)
           .font(.title)
-        
-        Text("City : \(event.city)")
-        Text("Price: \(format(event.price))")
+        VStack(alignment: .leading) {
+          ForEach(concert.events) { event in
+            Divider()
+            Text("City: \(event.city)")
+            Text("Venue: \(event.venueName)")
+            Text("Price: \(format(event.price))")
+            Text("Date: \(event.date)")
+          }
+        }
       }
       
       Spacer()
@@ -28,7 +34,7 @@ struct EventRow: View {
 
 struct EventRow_Preview: PreviewProvider {
   static var previews: some View {
-    EventRow(event: .superbowl)
+    EventRow(concert: .sports)
       .previewLayout(.fixed(width: 360, height: 100))
   }
 }
