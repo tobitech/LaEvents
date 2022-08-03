@@ -19,14 +19,17 @@ struct EventAlert: Identifiable {
 
 class EventsViewModel: ObservableObject {
   @Published var alert: EventAlert?
+  @Published var cityQuery = ""
+  @Published var priceQuery = ""
   
   private var loadDataCancellable: AnyCancellable?
   
   private var allConcerts: [EventCategory] = []
   @Published var filteredConcerts: [EventCategory] = []
   
-  func searchEvents(query: String) {
-    guard !query.isEmpty else {
+  func searchEvents() {
+    guard !self.cityQuery.isEmpty,
+    !self.priceQuery.isEmpty else {
       self.filteredConcerts = self.allConcerts
       return
     }
@@ -35,7 +38,7 @@ class EventsViewModel: ObservableObject {
     self.allConcerts.forEach { category in
       var filteredCategory = EventCategory(id: category.id, name: category.name, events: [], children: [])
       category.children.forEach { child in
-        if let filteredChildCategory = filterCategory(from: child, with: query) {
+        if let filteredChildCategory = filterCategory(from: child, cityQuery: self.cityQuery, priceQuery: self.priceQuery) {
           filteredCategory.children.append(filteredChildCategory)
           filteredConcerts.append(filteredCategory)
         }
@@ -45,9 +48,9 @@ class EventsViewModel: ObservableObject {
     self.filteredConcerts = filteredConcerts
   }
   
-  private func filterCategory(from category: EventCategory, with query: String) -> EventCategory? {
+  private func filterCategory(from category: EventCategory, cityQuery: String, priceQuery: String) -> EventCategory? {
     var newCategory = category
-    let events = category.events.filter { $0.city.lowercased().contains(query.lowercased()) }
+    let events = category.events.filter { $0.city.lowercased().contains(cityQuery.lowercased()) }
     newCategory.events = events
     
     return newCategory.events.isEmpty ? nil : newCategory
@@ -74,7 +77,6 @@ class EventsViewModel: ObservableObject {
 }
 
 struct EventsView: View {
-  @State var cityQuery = ""
   @ObservedObject var viewModel: EventsViewModel
   
   var body: some View {
@@ -84,9 +86,16 @@ struct EventsView: View {
         
         VStack(alignment: .leading, spacing: 0) {
           HStack {
-            TextField("Enter city name", text: self.$cityQuery)
+            VStack {
+              TextField("Enter city name", text: self.$viewModel.cityQuery)
+              
+              Divider()
+              
+              TextField("Enter price", text: self.$viewModel.priceQuery)
+                .keyboardType(.numberPad)
+            }
             Button("Search") {
-              self.viewModel.searchEvents(query: cityQuery)
+              self.viewModel.searchEvents()
             }
           }
           .padding(.horizontal)
