@@ -2,48 +2,28 @@
 //  EventRow.swift
 //  LaEvents
 //
-//  Created by Oluwatobi Omotayo on 27/07/2022.
+//  Created by Oluwatobi Omotayo on 03/08/2022.
 //
 
 import SwiftUI
 
-class ConcertRowViewModel: ObservableObject {
-  @Published var concert: EventCategory
-  
-  init(concert: EventCategory) {
-    self.concert = concert
-  }
-}
-
-struct ConcertRow: View {
-  @ObservedObject var viewModel: ConcertRowViewModel
+struct EventRow: View {
+  @State var event: Event
   
   var body: some View {
-    HStack {
-      VStack(alignment: .leading) {
-        Text(self.viewModel.concert.name)
-          .font(.title)
-        VStack(alignment: .leading) {
-          ForEach(self.viewModel.concert.events) { event in
-            Divider()
-            Text("City: \(event.city)")
-            Text("Venue: \(event.venueName)")
-            Text("Price: \(format(event.price))")
-            Text("Date: \(event.date)")
-          }
-        }
-      }
-      
-      Spacer()
+    VStack(alignment: .leading) {
+      Divider()
+      Text("City: \(self.event.city)")
+      Text("Venue: \(self.event.venueName)")
+      Text("Price: \(format(self.event.price))")
+      Text("Date: \(self.event.date)")
     }
-    .padding()
   }
 }
 
-struct ConcertRow_Preview: PreviewProvider {
+struct EventRow_Previews: PreviewProvider {
   static var previews: some View {
-    ConcertRow(viewModel: .init(concert: .sports))
-      .previewLayout(.fixed(width: 360, height: 100))
+    EventRow(event: .worldcup)
   }
 }
 

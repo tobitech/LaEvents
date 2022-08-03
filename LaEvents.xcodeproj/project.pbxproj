@@ -13,7 +13,8 @@
 		202117EF28915D8900116E0B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 202117EE28915D8900116E0B /* Preview Assets.xcassets */; };
 		202117F72891681500116E0B /* events.json in Resources */ = {isa = PBXBuildFile; fileRef = 202117F62891681500116E0B /* events.json */; };
 		202117F9289170BB00116E0B /* FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202117F8289170BB00116E0B /* FileClient.swift */; };
-		202117FB2891772B00116E0B /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202117FA2891772B00116E0B /* EventRow.swift */; };
+		202117FB2891772B00116E0B /* ChildConcert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202117FA2891772B00116E0B /* ChildConcert.swift */; };
+		204BF6F0289AA3CC00607CB6 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204BF6EF289AA3CC00607CB6 /* EventRow.swift */; };
 		2095A9F22893EBB1003A9F1C /* LaEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095A9F12893EBB1003A9F1C /* LaEventsTests.swift */; };
 		2095A9F92893F1EA003A9F1C /* EventCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095A9F82893F1EA003A9F1C /* EventCategory.swift */; };
 /* End PBXBuildFile section */
@@ -37,7 +38,8 @@
 		202117F528915DC400116E0B /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		202117F62891681500116E0B /* events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = events.json; sourceTree = "<group>"; };
 		202117F8289170BB00116E0B /* FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileClient.swift; sourceTree = "<group>"; };
-		202117FA2891772B00116E0B /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
+		202117FA2891772B00116E0B /* ChildConcert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildConcert.swift; sourceTree = "<group>"; };
+		204BF6EF289AA3CC00607CB6 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		2095A9EF2893EBB1003A9F1C /* LaEventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LaEventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2095A9F12893EBB1003A9F1C /* LaEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaEventsTests.swift; sourceTree = "<group>"; };
 		2095A9F82893F1EA003A9F1C /* EventCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCategory.swift; sourceTree = "<group>"; };
@@ -87,7 +89,8 @@
 				202117F8289170BB00116E0B /* FileClient.swift */,
 				202117E728915D8600116E0B /* LaEventsApp.swift */,
 				202117E928915D8600116E0B /* EventsView.swift */,
-				202117FA2891772B00116E0B /* EventRow.swift */,
+				202117FA2891772B00116E0B /* ChildConcert.swift */,
+				204BF6EF289AA3CC00607CB6 /* EventRow.swift */,
 				202117EB28915D8900116E0B /* Assets.xcassets */,
 				202117ED28915D8900116E0B /* Preview Content */,
 			);
@@ -213,10 +216,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2095A9F92893F1EA003A9F1C /* EventCategory.swift in Sources */,
+				204BF6F0289AA3CC00607CB6 /* EventRow.swift in Sources */,
 				202117EA28915D8600116E0B /* EventsView.swift in Sources */,
 				202117F9289170BB00116E0B /* FileClient.swift in Sources */,
 				202117E828915D8600116E0B /* LaEventsApp.swift in Sources */,
-				202117FB2891772B00116E0B /* EventRow.swift in Sources */,
+				202117FB2891772B00116E0B /* ChildConcert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

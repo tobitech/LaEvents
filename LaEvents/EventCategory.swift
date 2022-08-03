@@ -11,7 +11,7 @@ struct EventCategory: Codable, Identifiable {
   let id: Int
   let name: String
   var events: [Event]
-  let children: [EventCategory]
+  var children: [EventCategory]
 }
 
 #if DEBUG

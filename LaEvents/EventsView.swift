@@ -33,8 +33,10 @@ class EventsViewModel: ObservableObject {
     
     var filteredConcerts = [EventCategory]()
     self.allConcerts.forEach { category in
+      var filteredCategory = EventCategory(id: category.id, name: category.name, events: [], children: [])
       category.children.forEach { child in
-        if let filteredCategory = filterCategory(from: child, with: query) {
+        if let filteredChildCategory = filterCategory(from: child, with: query) {
+          filteredCategory.children.append(filteredChildCategory)
           filteredConcerts.append(filteredCategory)
         }
       }
@@ -92,8 +94,8 @@ struct EventsView: View {
         
         List(self.viewModel.filteredConcerts) { category in
           Section(header: Text(category.name)) {
-            ForEach(category.children) { concert in
-              ConcertRow(viewModel: .init(concert: concert))
+            ForEach(category.children) { child in
+              ChildConcert(viewModel: .init(concert: child))
             }
           }
         }
