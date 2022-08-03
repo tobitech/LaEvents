@@ -1,56 +1,26 @@
+//
+//  Mocks.swift
+//  LaEvents
+//
+//  Created by Oluwatobi Omotayo on 03/08/2022.
+//
+
 import Foundation
-
-/*
-func createEvents() {
-  for i in 1...10 {
-    events.append(
-      Event(
-        id: "\(i)",
-        city: "city\(i)",
-        artiste: "artiste\(i)",
-        price: Double(i)
-      )
-    )
-  }
-}
-
-createEvents()
-
-let encoder = JSONEncoder()
-encoder.outputFormatting = .prettyPrinted
-
-do {
-  let data = try encoder.encode(events)
-  print(String(data: data, encoding: .utf8)!)
-} catch let error {
-  print(error.localizedDescription)
-}
-*/
-
-
-
-
-
-struct EventCategory: Codable, Identifiable {
-  let id: Int
-  let name: String
-  var events: [Event]
-  let children: [EventCategory]
-}
-
-struct Event: Codable {
-  let id: String
-  let city: String
-  let artiste: String
-  let price: Double
-}
 
 extension EventCategory {
   static let awards = Self(
     id: 1207,
     name: "Entertainment Awards",
-    events: [.grammies, .eddies],
-    children: []
+    events: [],
+    children: [
+      .init(
+        id: 2343,
+        name: "Academy",
+        events: [.grammies, .eddies],
+        children: []
+      ),
+      .sports
+    ]
   )
   static let sports = Self(
     id: 783,
@@ -68,3 +38,15 @@ extension Event {
 }
 
 
+extension FileClient {
+  static let mock = Self(
+    loadData: { _ in
+      return .success(.init(
+        id: 343233,
+        name: "Parties",
+        events: [],
+        children: [.awards])
+      )
+    }
+  )
+}

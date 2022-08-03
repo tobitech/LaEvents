@@ -16,6 +16,9 @@
 		202117FB2891772B00116E0B /* ChildConcert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202117FA2891772B00116E0B /* ChildConcert.swift */; };
 		204BF6F0289AA3CC00607CB6 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204BF6EF289AA3CC00607CB6 /* EventRow.swift */; };
 		2095A9F92893F1EA003A9F1C /* EventCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095A9F82893F1EA003A9F1C /* EventCategory.swift */; };
+		20DE6084289B2FA700E74E23 /* EventListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DE6083289B2FA700E74E23 /* EventListViewModel.swift */; };
+		20DE6086289B2FEC00E74E23 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DE6085289B2FEC00E74E23 /* Models.swift */; };
+		20DE6088289B302700E74E23 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DE6087289B302700E74E23 /* Mocks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,13 +37,15 @@
 		202117E928915D8600116E0B /* EventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsView.swift; sourceTree = "<group>"; };
 		202117EB28915D8900116E0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		202117EE28915D8900116E0B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		202117F528915DC400116E0B /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		202117F62891681500116E0B /* events.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = events.json; sourceTree = "<group>"; };
 		202117F8289170BB00116E0B /* FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileClient.swift; sourceTree = "<group>"; };
 		202117FA2891772B00116E0B /* ChildConcert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildConcert.swift; sourceTree = "<group>"; };
 		204BF6EF289AA3CC00607CB6 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		2095A9EF2893EBB1003A9F1C /* LaEventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LaEventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2095A9F82893F1EA003A9F1C /* EventCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCategory.swift; sourceTree = "<group>"; };
+		20DE6083289B2FA700E74E23 /* EventListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListViewModel.swift; sourceTree = "<group>"; };
+		20DE6085289B2FEC00E74E23 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		20DE6087289B302700E74E23 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +69,6 @@
 		202117DB28915D8600116E0B = {
 			isa = PBXGroup;
 			children = (
-				202117F528915DC400116E0B /* Playground.playground */,
 				202117E628915D8600116E0B /* LaEvents */,
 				202117E528915D8600116E0B /* Products */,
 			);
@@ -84,8 +88,10 @@
 			children = (
 				2095A9F82893F1EA003A9F1C /* EventCategory.swift */,
 				202117F8289170BB00116E0B /* FileClient.swift */,
+				20DE6085289B2FEC00E74E23 /* Models.swift */,
 				202117E728915D8600116E0B /* LaEventsApp.swift */,
 				202117E928915D8600116E0B /* EventsView.swift */,
+				20DE6083289B2FA700E74E23 /* EventListViewModel.swift */,
 				202117FA2891772B00116E0B /* ChildConcert.swift */,
 				204BF6EF289AA3CC00607CB6 /* EventRow.swift */,
 				202117EB28915D8900116E0B /* Assets.xcassets */,
@@ -99,6 +105,7 @@
 			children = (
 				202117EE28915D8900116E0B /* Preview Assets.xcassets */,
 				202117F62891681500116E0B /* events.json */,
+				20DE6087289B302700E74E23 /* Mocks.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -207,8 +214,11 @@
 				2095A9F92893F1EA003A9F1C /* EventCategory.swift in Sources */,
 				204BF6F0289AA3CC00607CB6 /* EventRow.swift in Sources */,
 				202117EA28915D8600116E0B /* EventsView.swift in Sources */,
+				20DE6086289B2FEC00E74E23 /* Models.swift in Sources */,
 				202117F9289170BB00116E0B /* FileClient.swift in Sources */,
+				20DE6088289B302700E74E23 /* Mocks.swift in Sources */,
 				202117E828915D8600116E0B /* LaEventsApp.swift in Sources */,
+				20DE6084289B2FA700E74E23 /* EventListViewModel.swift in Sources */,
 				202117FB2891772B00116E0B /* ChildConcert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
