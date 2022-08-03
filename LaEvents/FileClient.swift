@@ -14,6 +14,16 @@ enum EventsError: Error {
   case decodingError
 }
 
+extension EventsError: LocalizedError {
+  var errorDescription: String? {
+    switch self {
+    case .fileNotFound: return "File not found"
+    case .invalidData: return "File not valid"
+    case .decodingError: return "Unable to decode data"
+    }
+  }
+}
+
 struct FileClient {
   var loadData: (String) -> Result<EventCategory, EventsError>
 }
