@@ -28,8 +28,7 @@ class EventsViewModel: ObservableObject {
   @Published var filteredConcerts: [EventCategory] = []
   
   func searchEvents() {
-    guard !self.cityQuery.isEmpty,
-    !self.priceQuery.isEmpty else {
+    if self.cityQuery.isEmpty && self.priceQuery.isEmpty {
       self.filteredConcerts = self.allConcerts
       return
     }
@@ -40,8 +39,11 @@ class EventsViewModel: ObservableObject {
       category.children.forEach { child in
         if let filteredChildCategory = filterCategory(from: child, cityQuery: self.cityQuery, priceQuery: self.priceQuery) {
           filteredCategory.children.append(filteredChildCategory)
-          filteredConcerts.append(filteredCategory)
         }
+      }
+      
+      if !filteredCategory.children.isEmpty {
+        filteredConcerts.append(filteredCategory)
       }
     }
     
@@ -54,7 +56,7 @@ class EventsViewModel: ObservableObject {
     if !cityQuery.isEmpty, !priceQuery.isEmpty, let priceValue = Double(priceQuery) {
       
       newCategory.events = category.events.filter { event in
-        event.city.lowercased().contains(cityQuery.lowercased()) || event.price <= priceValue
+        event.city.lowercased().contains(cityQuery.lowercased()) && event.price <= priceValue
       }
     } else if !cityQuery.isEmpty {
       newCategory.events = category.events.filter { event in
