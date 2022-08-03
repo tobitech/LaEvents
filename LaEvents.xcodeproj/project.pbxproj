@@ -15,7 +15,6 @@
 		202117F9289170BB00116E0B /* FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202117F8289170BB00116E0B /* FileClient.swift */; };
 		202117FB2891772B00116E0B /* ChildConcert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202117FA2891772B00116E0B /* ChildConcert.swift */; };
 		204BF6F0289AA3CC00607CB6 /* EventRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204BF6EF289AA3CC00607CB6 /* EventRow.swift */; };
-		2095A9F22893EBB1003A9F1C /* LaEventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095A9F12893EBB1003A9F1C /* LaEventsTests.swift */; };
 		2095A9F92893F1EA003A9F1C /* EventCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095A9F82893F1EA003A9F1C /* EventCategory.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +40,6 @@
 		202117FA2891772B00116E0B /* ChildConcert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildConcert.swift; sourceTree = "<group>"; };
 		204BF6EF289AA3CC00607CB6 /* EventRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRow.swift; sourceTree = "<group>"; };
 		2095A9EF2893EBB1003A9F1C /* LaEventsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LaEventsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2095A9F12893EBB1003A9F1C /* LaEventsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaEventsTests.swift; sourceTree = "<group>"; };
 		2095A9F82893F1EA003A9F1C /* EventCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,7 +66,6 @@
 			children = (
 				202117F528915DC400116E0B /* Playground.playground */,
 				202117E628915D8600116E0B /* LaEvents */,
-				2095A9F02893EBB1003A9F1C /* LaEventsTests */,
 				202117E528915D8600116E0B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,14 +101,6 @@
 				202117F62891681500116E0B /* events.json */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		2095A9F02893EBB1003A9F1C /* LaEventsTests */ = {
-			isa = PBXGroup;
-			children = (
-				2095A9F12893EBB1003A9F1C /* LaEventsTests.swift */,
-			);
-			path = LaEventsTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,7 +217,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2095A9F22893EBB1003A9F1C /* LaEventsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
