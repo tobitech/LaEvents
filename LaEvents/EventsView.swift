@@ -73,7 +73,6 @@ class EventsViewModel: ObservableObject {
     var newCategory = category
     
     if !cityQuery.isEmpty, !priceQuery.isEmpty, let priceValue = Double(priceQuery) {
-      
       newCategory.events = category.events.filter { event in
         event.city.lowercased().contains(cityQuery.lowercased()) && event.price <= priceValue
       }
