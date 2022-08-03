@@ -7,16 +7,24 @@
 
 import SwiftUI
 
-struct EventRow: View {
-  @State var concert: EventCategory
+class ConcertRowViewModel: ObservableObject {
+  @Published var concert: EventCategory
+  
+  init(concert: EventCategory) {
+    self.concert = concert
+  }
+}
+
+struct ConcertRow: View {
+  @ObservedObject var viewModel: ConcertRowViewModel
   
   var body: some View {
     HStack {
       VStack(alignment: .leading) {
-        Text(concert.name)
+        Text(self.viewModel.concert.name)
           .font(.title)
         VStack(alignment: .leading) {
-          ForEach(concert.events) { event in
+          ForEach(self.viewModel.concert.events) { event in
             Divider()
             Text("City: \(event.city)")
             Text("Venue: \(event.venueName)")
@@ -32,9 +40,9 @@ struct EventRow: View {
   }
 }
 
-struct EventRow_Preview: PreviewProvider {
+struct ConcertRow_Preview: PreviewProvider {
   static var previews: some View {
-    EventRow(concert: .sports)
+    ConcertRow(viewModel: .init(concert: .sports))
       .previewLayout(.fixed(width: 360, height: 100))
   }
 }

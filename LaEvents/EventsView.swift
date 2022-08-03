@@ -19,28 +19,36 @@ struct EventAlert: Identifiable {
 
 class EventsViewModel: ObservableObject {
   @Published var alert: EventAlert?
-  @Published var query: String = ""
   
   private var loadDataCancellable: AnyCancellable?
   
-  private var concerts: [EventCategory] = []
-  var filteredCategories: [EventCategory] {
-    return self.concerts
-//    guard !query.isEmpty else {
-//      return self.concerts
-//    }
-//
-//    var filtered = [EventCategory]()
-//    for item in self.concerts {
-//      var category = item
-//      let events = category.events.filter { $0.city.lowercased().contains(query.lowercased()) }
-//      category.events = events
-//      if !category.events.isEmpty {
-//        filtered.append(category)
-//      }
-//    }
-//
-//    return filtered
+  private var allConcerts: [EventCategory] = []
+  @Published var filteredConcerts: [EventCategory] = []
+  
+  func searchEvents(query: String) {
+    guard !query.isEmpty else {
+      self.filteredConcerts = self.allConcerts
+      return
+    }
+    
+    var filteredConcerts = [EventCategory]()
+    self.allConcerts.forEach { category in
+      category.children.forEach { child in
+        if let filteredCategory = filterCategory(from: child, with: query) {
+          filteredConcerts.append(filteredCategory)
+        }
+      }
+    }
+    
+    self.filteredConcerts = filteredConcerts
+  }
+  
+  private func filterCategory(from category: EventCategory, with query: String) -> EventCategory? {
+    var newCategory = category
+    let events = category.events.filter { $0.city.lowercased().contains(query.lowercased()) }
+    newCategory.events = events
+    
+    return newCategory.events.isEmpty ? nil : newCategory
   }
   
   let fileClient: FileClient
@@ -55,7 +63,8 @@ class EventsViewModel: ObservableObject {
     let result = self.fileClient.loadData("events")
     switch result {
     case let .success(category):
-      self.concerts = category.children
+      self.allConcerts = category.children
+      self.filteredConcerts = self.allConcerts
     case let .failure(error):
       self.alert = .init(title: "Oops!", message: error.localizedDescription)
     }
@@ -63,34 +72,46 @@ class EventsViewModel: ObservableObject {
 }
 
 struct EventsView: View {
-  
+  @State var cityQuery = ""
   @ObservedObject var viewModel: EventsViewModel
   
   var body: some View {
     NavigationView {
-      List(self.viewModel.filteredCategories) { category in
-        Section(header: Text(category.name)) {
-          ForEach(category.children) { concert in
-            EventRow(concert: concert)
+      VStack {
+        Divider()
+        
+        VStack(alignment: .leading, spacing: 0) {
+          HStack {
+            TextField("Enter city name", text: self.$cityQuery)
+            Button("Search") {
+              self.viewModel.searchEvents(query: cityQuery)
+            }
+          }
+          .padding(.horizontal)
+        }
+        
+        List(self.viewModel.filteredConcerts) { category in
+          Section(header: Text(category.name)) {
+            ForEach(category.children) { concert in
+              ConcertRow(viewModel: .init(concert: concert))
+            }
           }
         }
       }
-      .listStyle(.grouped)
       .alert(item: self.$viewModel.alert, content: { alert in
         Alert(
           title: Text(alert.title),
           message: Text(alert.message)
         )
       })
-      .navigationTitle("Concerts")
-      .searchable(text: self.$viewModel.query, prompt: "Search events...")
+      .navigationBarTitle("Concerts", displayMode: .inline)
     }
   }
 }
 
 struct EventsView_Previews: PreviewProvider {
   static var previews: some View {
-    EventsView(viewModel: EventsViewModel(fileClient: .live))
+    EventsView(viewModel: EventsViewModel(fileClient: .mock))
   }
 }
 

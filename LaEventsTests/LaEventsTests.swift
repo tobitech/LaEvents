@@ -24,13 +24,13 @@ class LaEventsTests: XCTestCase {
   func testEventsSearch() {
     let viewModel = EventsViewModel(fileClient: .mock)
     
-    viewModel.query = "san"
+    viewModel.cityQuery = "san"
     
     XCTAssertEqual(viewModel.filteredEvents, [
       .grammies
     ])
     
-    viewModel.query = ""
+    viewModel.cityQuery = ""
     
     XCTAssertEqual(viewModel.filteredEvents, [
       .superbowl,
