@@ -62,7 +62,12 @@ extension FileClient {
 extension FileClient {
   static let mock = Self(
     loadData: { _ in
-      return .success(.sports)
+      return .success(.init(
+        id: 343233,
+        name: "Parties",
+        events: [],
+        children: [.awards])
+      )
     }
   )
 }

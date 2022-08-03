@@ -50,8 +50,23 @@ class EventsViewModel: ObservableObject {
   
   private func filterCategory(from category: EventCategory, cityQuery: String, priceQuery: String) -> EventCategory? {
     var newCategory = category
-    let events = category.events.filter { $0.city.lowercased().contains(cityQuery.lowercased()) }
-    newCategory.events = events
+    
+    if !cityQuery.isEmpty, !priceQuery.isEmpty, let priceValue = Double(priceQuery) {
+      
+      newCategory.events = category.events.filter { event in
+        event.city.lowercased().contains(cityQuery.lowercased()) || event.price <= priceValue
+      }
+    } else if !cityQuery.isEmpty {
+      newCategory.events = category.events.filter { event in
+        event.city.lowercased().contains(cityQuery.lowercased())
+      }
+    } else if !priceQuery.isEmpty, let priceValue = Double(priceQuery) {
+      newCategory.events = category.events.filter { event in
+        event.price <= priceValue
+      }
+    } else {
+      return nil
+    }
     
     return newCategory.events.isEmpty ? nil : newCategory
   }

@@ -19,8 +19,16 @@ extension EventCategory {
   static let awards = Self(
     id: 1207,
     name: "Entertainment Awards",
-    events: [.grammies, .eddies],
-    children: []
+    events: [],
+    children: [
+      .init(
+        id: 2343,
+        name: "Academy",
+        events: [.grammies, .eddies],
+        children: []
+      ),
+      .sports
+    ]
   )
   static let sports = Self(
     id: 783,

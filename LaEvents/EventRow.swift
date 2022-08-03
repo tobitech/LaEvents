@@ -29,7 +29,7 @@ struct EventRow_Previews: PreviewProvider {
 
 private func format(_ price: Double) -> String {
   let formatter = NumberFormatter()
-  formatter.minimumFractionDigits = 2
-  formatter.currencyCode = Locale.current.currencyCode
+  formatter.locale = Locale.current
+  formatter.numberStyle = .currency
   return formatter.string(from: price as NSNumber) ?? "\(price)"
 }
