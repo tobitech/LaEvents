@@ -27,6 +27,25 @@ class EventsViewModel: ObservableObject {
   private var allConcerts: [EventCategory] = []
   @Published var filteredConcerts: [EventCategory] = []
   
+  let fileClient: FileClient
+  
+  init(fileClient: FileClient) {
+    self.fileClient = fileClient
+    
+    self.loadEvents()
+  }
+  
+  func loadEvents() {
+    let result = self.fileClient.loadData("events")
+    switch result {
+    case let .success(category):
+      self.allConcerts = category.children
+      self.filteredConcerts = self.allConcerts
+    case let .failure(error):
+      self.alert = .init(title: "Oops!", message: error.localizedDescription)
+    }
+  }
+  
   func searchEvents() {
     if self.cityQuery.isEmpty && self.priceQuery.isEmpty {
       self.filteredConcerts = self.allConcerts
@@ -73,23 +92,10 @@ class EventsViewModel: ObservableObject {
     return newCategory.events.isEmpty ? nil : newCategory
   }
   
-  let fileClient: FileClient
-  
-  init(fileClient: FileClient) {
-    self.fileClient = fileClient
-    
-    self.loadEvents()
-  }
-  
-  func loadEvents() {
-    let result = self.fileClient.loadData("events")
-    switch result {
-    case let .success(category):
-      self.allConcerts = category.children
-      self.filteredConcerts = self.allConcerts
-    case let .failure(error):
-      self.alert = .init(title: "Oops!", message: error.localizedDescription)
-    }
+  func resetFilters() {
+    self.cityQuery = ""
+    self.priceQuery = ""
+    self.filteredConcerts = self.allConcerts
   }
 }
 
@@ -111,8 +117,14 @@ struct EventsView: View {
               TextField("Enter price", text: self.$viewModel.priceQuery)
                 .keyboardType(.numberPad)
             }
-            Button("Search") {
-              self.viewModel.searchEvents()
+            
+            VStack(alignment: .leading, spacing: 10) {
+              Button("Search") {
+                self.viewModel.searchEvents()
+              }
+              Button("Reset", role: .destructive) {
+                self.viewModel.resetFilters()
+              }
             }
           }
           .padding(.horizontal)
