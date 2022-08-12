@@ -39,12 +39,14 @@ struct EventsView: View {
           .padding(.horizontal)
         }
         
-        List(self.viewModel.filteredConcerts) { category in
-          Section(header: Text(category.name)) {
-            ForEach(category.children) { child in
-              ChildConcert(viewModel: .init(concert: child))
-            }
-          }
+        List(self.viewModel.filteredEvents) { event in
+//          Section(header: Text(category.name)) {
+//            ForEach(category.children) { child in
+//              ChildConcert(viewModel: .init(concert: child))
+//            }
+//          }
+          EventRow(event: event)
+            .listRowSeparator(.hidden)
         }
       }
       .alert(item: self.$viewModel.alert, content: { alert in

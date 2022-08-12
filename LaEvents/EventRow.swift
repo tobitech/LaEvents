@@ -12,11 +12,14 @@ struct EventRow: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      Divider()
+      // Divider()
       Text("City: \(self.event.city)")
       Text("Venue: \(self.event.venueName)")
       Text("Price: \(format(self.event.price))")
       Text("Date: \(self.event.date)")
+      
+      Rectangle()
+        .frame(maxWidth: .infinity, idealHeight: 0, maxHeight: 0)
     }
   }
 }

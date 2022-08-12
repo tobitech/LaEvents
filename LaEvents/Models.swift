@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 struct EventCategory: Codable, Identifiable {
   let id: Int
   let name: String

@@ -23,49 +23,58 @@ class EventsViewModel: ObservableObject {
   
   private var loadDataCancellable: AnyCancellable?
   
-  private var allConcerts: [EventCategory] = []
-  @Published var filteredConcerts: [EventCategory] = []
+  private var allEvents: [Event] = []
+  @Published var filteredEvents: [Event] = []
   
   let fileClient: FileClient
   
   init(fileClient: FileClient) {
     self.fileClient = fileClient
     
-    self.loadEvents()
+    self.loadData()
   }
   
-  func loadEvents() {
+  func loadData() {
     let result = self.fileClient.loadData("events")
     switch result {
     case let .success(category):
-      self.allConcerts = category.children
-      self.filteredConcerts = self.allConcerts
+      self.allEvents = self.loadEvents(concert: category)
+      self.filteredEvents = self.allEvents
     case let .failure(error):
       self.alert = .init(title: "Oops!", message: error.localizedDescription)
     }
   }
   
+  private func loadEvents(concert: EventCategory) -> [Event] {
+    print("--event---")
+    let events = concert.events
+    let others = concert.children.flatMap {
+      loadEvents(concert: $0)
+    }
+    return events + others
+  }
+  
   func searchEvents() {
-    if self.cityQuery.isEmpty && self.priceQuery.isEmpty {
-      self.filteredConcerts = self.allConcerts
-      return
-    }
-    
-    var filteredConcerts = [EventCategory]()
-    self.allConcerts.forEach { category in
-      var filteredCategory = EventCategory(id: category.id, name: category.name, events: [], children: [])
-      category.children.forEach { child in
-        if let filteredChildCategory = filterCategory(from: child, cityQuery: self.cityQuery, priceQuery: self.priceQuery) {
-          filteredCategory.children.append(filteredChildCategory)
-        }
-      }
-      
-      if !filteredCategory.children.isEmpty {
-        filteredConcerts.append(filteredCategory)
-      }
-    }
-    
-    self.filteredConcerts = filteredConcerts
+//    if self.cityQuery.isEmpty && self.priceQuery.isEmpty {
+//      self.filteredConcerts = self.allConcerts
+//      return
+//    }
+//
+//    var filteredConcerts = [EventCategory]()
+//    self.allConcerts.forEach { category in
+//      var filteredCategory = EventCategory(id: category.id, name: category.name, events: [], children: [])
+//      category.children.forEach { child in
+//        if let filteredChildCategory = filterCategory(from: child, cityQuery: self.cityQuery, priceQuery: self.priceQuery) {
+//          filteredCategory.children.append(filteredChildCategory)
+//        }
+//      }
+//
+//      if !filteredCategory.children.isEmpty {
+//        filteredConcerts.append(filteredCategory)
+//      }
+//    }
+//
+//    self.filteredConcerts = filteredConcerts
   }
   
   private func filterCategory(from category: EventCategory, cityQuery: String, priceQuery: String) -> EventCategory? {
@@ -93,6 +102,6 @@ class EventsViewModel: ObservableObject {
   func resetFilters() {
     self.cityQuery = ""
     self.priceQuery = ""
-    self.filteredConcerts = self.allConcerts
+    self.filteredEvents = self.allEvents
   }
 }
